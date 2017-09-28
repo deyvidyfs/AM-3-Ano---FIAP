@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">AM-MoneyInvest</string>
+
+    <string name="title_activity_opening">OpeningActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="pergunta_saldo">Selecione como você quer recarregar o seu saldo:</string>
+    <string name="saldo_disponivel">Saldo Disponível:</string>
+    <string name="cartao_credito">Cartão de Crédito</string>
+    <string name="recarregar">Recarregar</string>
+    <string name="transferencia_bancaria">Transferência Bancária</string>
+    <string name="voltar">Voltar</string>
+    <string name="boleto_bancario">Boleto Bancário</string>
+    <string name="nome">Nome</string>
+    <string name="digite_nome">Digite seu nome</string>
+    <string name="e_mail">E-mail</string>
+    <string name="digite_email">Digite o seu e-mail</string>
+    <string name="cpf">CPF</string>
+    <string name="digite_cpf">Digite o seu CPF (apenas números)</string>
+    <string name="senha">Senha</string>
+    <string name="digite_senha">Digite a sua senha...</string>
+    <string name="digite_mensagem">Digite a sua mensagem aqui</string>
+    <string name="pergunta_esqueci">Digite o seu e-mail abaixo para mudar a sua senha:</string>
+    <string name="enviar">Enviar</string>
+    <string name="meus_investimentos">Meus Investimentos</string>
+    <string name="resgatar_investimentos">Resgatar Investimentos</string>
+    <string name="acrescentar_saldo">Acrescentar Saldo</string>
+    <string name="investir_saldo">Investir Saldo</string>
+    <string name="falar_assitente">Falar com o Assitente</string>
+    <string name="veja_investimentos">Veja seus investimentos abaixo:</string>
+    <string name="selecione_investimento">Selecione o investimento desejado abaixo:</string>
+    <string name="entrar">Entrar</string>
+    <string name="quero_cadastrar">Quero me cadastrar</string>
+    <string name="esqueci_senha">Esqueci minha senha</string>
+    <string name="resgatar">Resgatar</string>
+</resources>

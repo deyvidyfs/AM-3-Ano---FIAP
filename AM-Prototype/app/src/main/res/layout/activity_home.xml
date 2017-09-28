@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.android.a3sir.protechsolutions.am_prototype.HomeActivity"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#dddddd">
+
+        <ImageView
+            android:id="@+id/imgUserHome"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="0"
+            app:srcCompat="@mipmap/ic_user"
+            android:clickable="true"
+            android:onClick="acessarCadastro"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="NOME DO USUÁRIO"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/txtNomeHome"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Saldo Disponível: R$ XXXX,XX"
+                android:paddingTop="5dp"
+                android:id="@+id/txtSaldoHome"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Saldo Investido Total: R$ XXXXX,XX"
+                android:paddingTop="5dp"
+                android:id="@+id/txtInvestHome"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="125dp"
+            android:text="@string/meus_investimentos"
+            android:id="@+id/btnMeusInvestHome"
+            android:onClick="meusInvestimentos"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="125dp"
+            android:text="@string/resgatar_investimentos"
+            android:id="@+id/btnResgatarHome"
+            android:layout_weight="0.5"
+            android:onClick="resgatarInvestimentos"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="125dp"
+            android:text="@string/acrescentar_saldo"
+            android:id="@+id/btnMaisSaldoHome"
+            android:layout_weight="0.5"
+            android:onClick="carregarSaldo"/>
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="125dp"
+            android:text="@string/investir_saldo"
+            android:id="@+id/btnInvestirHome"
+            android:onClick="investir"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:text="@string/falar_assitente"
+        android:id="@+id/btnAssistenteHome"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="center"
+        android:onClick="acessarChatbot"/>
+
+</android.widget.LinearLayout>
