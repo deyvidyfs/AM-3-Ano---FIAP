@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="NOME DO USUÁRIO"
+                android:text=""
                 android:textSize="24sp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/txtNomeHome"/>
@@ -39,14 +39,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Saldo Disponível: R$ XXXX,XX"
+                android:text="Saldo Disponível: "
                 android:paddingTop="5dp"
                 android:id="@+id/txtSaldoHome"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Saldo Investido Total: R$ XXXXX,XX"
+                android:text="Saldo Investido Total:"
                 android:paddingTop="5dp"
                 android:id="@+id/txtInvestHome"/>
 

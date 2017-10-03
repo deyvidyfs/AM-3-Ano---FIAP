@@ -33,4 +33,5 @@
     <string name="quero_cadastrar">Quero me cadastrar</string>
     <string name="esqueci_senha">Esqueci minha senha</string>
     <string name="resgatar">Resgatar</string>
+    <string name="saldo_indisponivel">Saldo Indisponível</string>
 </resources>

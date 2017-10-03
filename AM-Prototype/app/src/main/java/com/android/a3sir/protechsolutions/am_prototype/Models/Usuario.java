@@ -10,13 +10,21 @@ public class Usuario {
     public String emailUsuario;
     public String cpfUsuario;
     public String senhaUsuario;
+    public long saldoUsuario;
+    public long investimentoUsuario;
 
-    public Usuario(int idUsuario, String nomeUsuario, String emailUsuario, String cpfUsuario, String senhaUsuario) {
+    public Usuario(){
+
+    }
+
+    public Usuario(int idUsuario, String nomeUsuario, String emailUsuario, String cpfUsuario, String senhaUsuario, long saldoUsuario, long investimentoUsuario) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.emailUsuario = emailUsuario;
         this.cpfUsuario = cpfUsuario;
         this.senhaUsuario = senhaUsuario;
+        this.saldoUsuario = saldoUsuario;
+        this.investimentoUsuario = investimentoUsuario;
     }
 
     public int getIdUsuario() {
@@ -57,5 +65,21 @@ public class Usuario {
 
     public void setSenhaUsuario(String senhaUsuario) {
         this.senhaUsuario = senhaUsuario;
+    }
+
+    public long getSaldoUsuario() {
+        return saldoUsuario;
+    }
+
+    public void setSaldoUsuario(long saldoUsuario) {
+        this.saldoUsuario = saldoUsuario;
+    }
+
+    public long getInvestimentoUsuario() {
+        return investimentoUsuario;
+    }
+
+    public void setInvestimentoUsuario(long investimentoUsuario) {
+        this.investimentoUsuario = investimentoUsuario;
     }
 }

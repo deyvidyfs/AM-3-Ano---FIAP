@@ -4,13 +4,38 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import com.android.a3sir.protechsolutions.am_prototype.Models.Usuario;
+import com.android.a3sir.protechsolutions.am_prototype.dao.UsuarioDAO;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private TextView txtNomeHome;
+    private TextView txtSaldoHome;
+    private TextView txtInvestHome;
+
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        txtNomeHome = (TextView) findViewById(R.id.txtNomeHome);
+        txtSaldoHome = (TextView) findViewById(R.id.txtSaldoHome);
+        txtInvestHome = (TextView) findViewById(R.id.txtInvestHome);
+
+        Intent i = getIntent();
+        String usuarioSrc = i.getStringExtra("usuario");
+        UsuarioDAO dao = new UsuarioDAO(this);
+
+        usuario = dao.buscarUsuario(usuarioSrc);
+
+        txtNomeHome.setText(usuario.getNomeUsuario());
+        txtSaldoHome.setText("Saldo Disponível: R$ " + usuario.getSaldoUsuario());
+        txtInvestHome.setText("Saldo Investido Total: R$ " + usuario.getInvestimentoUsuario());
+
     }
 
     protected void investir (View v){
@@ -25,6 +50,8 @@ public class HomeActivity extends AppCompatActivity {
 
     protected void meusInvestimentos (View v){
         Intent intent = new Intent(this, InvestimentosActivity.class);
+        intent.putExtra("saldo",usuario.getSaldoUsuario());
+        intent.putExtra("idUsuario",usuario.getIdUsuario());
         startActivity(intent);
     }
 
@@ -35,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
 
     protected void acessarCadastro (View v){
         Intent intent = new Intent(this, CadastroActivity.class);
+        intent.putExtra("origem","Menu");
         startActivity(intent);
     }
 
