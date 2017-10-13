@@ -22,22 +22,21 @@
             android:layout_marginTop="30dp"
             android:id="@+id/txtTituloCadastro"/>
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imgUserCadastro"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="100dp"
+            app:srcCompat="@mipmap/ic_user"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:layout_marginTop="30dp"/>
 
-            <ImageView
-                android:id="@+id/imgUserCadastro"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:srcCompat="@mipmap/ic_user"
-                android:layout_gravity="center_vertical" />
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nome" />
+            android:text="@string/nome"
+            android:layout_marginTop="30dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,6 +67,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/digite_cpf"
             android:inputType="number"
+            android:maxLength="11"
             android:id="@+id/edtCPFCadastro"/>
 
         <TextView

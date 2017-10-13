@@ -34,11 +34,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R$ XXXX,XX"
+            android:text=""
             android:textSize="18sp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:id="@+id/txtSaldoSaldo"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +56,8 @@
                 android:text="@string/cartao_credito"
                 android:layout_weight="1"
                 android:layout_gravity="right"
-                android:id="@+id/btnCartaoSaldo"/>
+                android:id="@+id/btnCartaoSaldo"
+                android:onClick="recarregarSaldo"/>
 
         </LinearLayout>
 
@@ -74,7 +76,8 @@
                 android:text="@string/transferencia_bancaria"
                 android:layout_weight="1"
                 android:layout_gravity="right"
-                android:id="@+id/btnTransferenciaSaldo"/>
+                android:id="@+id/btnTransferenciaSaldo"
+                android:onClick="recarregarSaldo"/>
 
         </LinearLayout>
 
@@ -93,7 +96,8 @@
                 android:text="@string/boleto_bancario"
                 android:layout_weight="1"
                 android:layout_gravity="right"
-                android:id="@+id/btnBoletoSaldo"/>
+                android:id="@+id/btnBoletoSaldo"
+                android:onClick="recarregarSaldo"/>
 
         </LinearLayout>
 

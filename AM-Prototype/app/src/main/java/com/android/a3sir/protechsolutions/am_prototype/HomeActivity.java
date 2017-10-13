@@ -16,6 +16,8 @@ public class HomeActivity extends AppCompatActivity {
     private TextView txtInvestHome;
 
     private Usuario usuario;
+    private String usuarioSrc;
+    private UsuarioDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +28,35 @@ public class HomeActivity extends AppCompatActivity {
         txtSaldoHome = (TextView) findViewById(R.id.txtSaldoHome);
         txtInvestHome = (TextView) findViewById(R.id.txtInvestHome);
 
+        /*
         Intent i = getIntent();
-        String usuarioSrc = i.getStringExtra("usuario");
-        UsuarioDAO dao = new UsuarioDAO(this);
+        usuarioSrc = i.getStringExtra("usuario");
+        dao = new UsuarioDAO(this);
 
+        usuario = dao.buscarUsuario(usuarioSrc);
+
+
+        txtNomeHome.setText(usuario.getNomeUsuario());
+        txtSaldoHome.setText("Saldo Disponível: R$ " + usuario.getSaldoUsuario());
+        txtInvestHome.setText("Saldo Investido Total: R$ " + usuario.getInvestimentoUsuario());
+        */
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
         usuario = dao.buscarUsuario(usuarioSrc);
 
         txtNomeHome.setText(usuario.getNomeUsuario());
         txtSaldoHome.setText("Saldo Disponível: R$ " + usuario.getSaldoUsuario());
         txtInvestHome.setText("Saldo Investido Total: R$ " + usuario.getInvestimentoUsuario());
-
     }
+
 
     protected void investir (View v){
         Intent intent = new Intent(this, InvestirActivity.class);
+        intent.putExtra("saldo",usuario.getSaldoUsuario());
+        intent.putExtra("idUsuario",usuario.getIdUsuario());
         startActivity(intent);
     }
 
@@ -68,6 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 
     protected void carregarSaldo (View v){
         Intent intent = new Intent(this, SaldoActivity.class);
+        intent.putExtra("emailUsuario",usuario.getEmailUsuario());
         startActivity(intent);
     }
 
