@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/saldo_indisponivel"
+            android:text="R$ 0"
             android:textSize="18sp"
             android:gravity="center"
             android:layout_gravity="center"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Investimento 1:"
+                android:text="Poupança:"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_weight="0.5"/>
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="R$ XXXX,XX"
+                android:text="R$ 0"
                 android:textSize="18sp"
                 android:layout_weight="0.5"
                 android:gravity="right"/>
@@ -82,7 +82,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Investimento 2:"
+                android:text="Tesouro Direto:"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_weight="0.5"/>
@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="R$ XXXX,XX"
+                android:text="R$ 0"
                 android:textSize="18sp"
                 android:layout_weight="0.5"
                 android:gravity="right"/>
@@ -110,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Investimento 3:"
+                android:text="CDB:"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_weight="0.5"/>
@@ -118,37 +118,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="R$ XXXX,XX"
+                android:text="R$ 0"
                 android:textSize="18sp"
                 android:layout_weight="0.5"
                 android:gravity="right"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Investimento 4:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_weight="0.5"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="R$ XXXX,XX"
-                    android:textSize="18sp"
-                    android:layout_weight="0.5"
-                    android:gravity="right"/>
 
         </LinearLayout>
 

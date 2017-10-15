@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private String emailUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,10 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void login (View v){
 
-        String emailUsuario = edtEmailUsuario.getText().toString();
+        emailUsuario = edtEmailUsuario.getText().toString();
         String senhaUsuario = edtSenhaUsuario.getText().toString();
-        UsuarioDAO dao = new UsuarioDAO(this);
-        Usuario usuario;
 
 
         if(validarCampos(emailUsuario,senhaUsuario)){
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
                                     Intent i = new Intent(getApplicationContext(),HomeActivity.class);
+                                    i.putExtra("emailUsuario",emailUsuario);
                                     startActivity(i);
 
                                 }else{

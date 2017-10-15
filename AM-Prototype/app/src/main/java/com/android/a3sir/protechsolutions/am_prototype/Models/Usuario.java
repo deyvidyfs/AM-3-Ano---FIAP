@@ -1,5 +1,8 @@
 package com.android.a3sir.protechsolutions.am_prototype.Models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by dlfs on 9/26/2017.
  */
@@ -9,22 +12,30 @@ public class Usuario {
     public String nomeUsuario;
     public String emailUsuario;
     public String cpfUsuario;
-    public String senhaUsuario;
     public long saldoUsuario;
     public long investimentoUsuario;
+    public String idFirebaseUsuario;
 
     public Usuario(){
 
     }
 
-    public Usuario(int idUsuario, String nomeUsuario, String emailUsuario, String cpfUsuario, String senhaUsuario, long saldoUsuario, long investimentoUsuario) {
+    public Usuario(int idUsuario, String nomeUsuario, String emailUsuario, String cpfUsuario, long saldoUsuario, long investimentoUsuario, String idFirebaseUsuario) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.emailUsuario = emailUsuario;
         this.cpfUsuario = cpfUsuario;
-        this.senhaUsuario = senhaUsuario;
         this.saldoUsuario = saldoUsuario;
         this.investimentoUsuario = investimentoUsuario;
+        this.idFirebaseUsuario = idFirebaseUsuario;
+    }
+
+    public String getIdFirebaseUsuario() {
+        return idFirebaseUsuario;
+    }
+
+    public void setIdFirebaseUsuario(String idFirebaseUsuario) {
+        this.idFirebaseUsuario = idFirebaseUsuario;
     }
 
     public int getIdUsuario() {
@@ -59,14 +70,6 @@ public class Usuario {
         this.cpfUsuario = cpfUsuario;
     }
 
-    public String getSenhaUsuario() {
-        return senhaUsuario;
-    }
-
-    public void setSenhaUsuario(String senhaUsuario) {
-        this.senhaUsuario = senhaUsuario;
-    }
-
     public long getSaldoUsuario() {
         return saldoUsuario;
     }
@@ -81,5 +84,19 @@ public class Usuario {
 
     public void setInvestimentoUsuario(long investimentoUsuario) {
         this.investimentoUsuario = investimentoUsuario;
+    }
+
+    public Map<String,Object> toMap(){
+        HashMap<String,Object> result = new HashMap<>();
+
+        result.put("cpfUsuario", cpfUsuario);
+        result.put("emailUsuario",emailUsuario);
+        result.put("idFirebaseUsuario",idFirebaseUsuario);
+        result.put("idUsuario",idUsuario);
+        result.put("investimentoUsuario",investimentoUsuario);
+        result.put("nomeUsuario",nomeUsuario);
+        result.put("saldoUsuario",saldoUsuario);
+
+        return result;
     }
 }

@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R$ XXXX,XX"
+            android:text="R$ 0"
             android:textSize="18sp"
             android:gravity="center"
             android:layout_gravity="center"
@@ -43,33 +43,34 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:text="Investimento 1"
-            android:layout_marginTop="30dp"
+            android:text="Poupança"
+            android:layout_marginTop="20dp"
             android:id="@+id/btnI1Investir"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:text="Investimento 2"
+            android:text="Tesouro Direto"
             android:layout_marginTop="10dp"
             android:id="@+id/btnI2Investir"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:text="Investimento 3"
+            android:text="CDB"
             android:layout_marginTop="10dp"
             android:id="@+id/btnI3Investir"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="Investimento 4"
-            android:layout_marginTop="10dp"
-            android:id="@+id/btnI4Investir"
-            android:layout_marginBottom="50dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/voltar"
+            android:onClick="voltar"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
+
 
 
 </android.widget.ScrollView>

@@ -73,10 +73,6 @@ public class SaldoActivity extends AppCompatActivity {
     }
 
     protected void atualizarSaldo(EditText input){
-
-
-
-
         long saldoAdicionado;
         long saldoAntigo;
         long saldoNovo;
@@ -85,8 +81,16 @@ public class SaldoActivity extends AppCompatActivity {
 
         //RecarregarSaldo
         saldoNovo = saldoAntigo + saldoAdicionado;
+
+
         usuario.setSaldoUsuario(saldoNovo);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("USERID");
+        builder.setMessage(usuario.getIdFirebaseUsuario());
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK",null);
+        builder.show();
 
 
 

@@ -20,7 +20,7 @@ import java.util.List;
 public class UsuarioDAO extends SQLiteOpenHelper{
 
     private static final String BANCO = "usuarios";
-    private static final int VERSAO = 2;
+    private static final int VERSAO = 5;
 
     public UsuarioDAO (Context context){
         super(context,BANCO,null,VERSAO);
@@ -29,7 +29,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE TB_USUARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT, NOME TEXT, EMAIL TEXT UNIQUE, CPF TEXT UNIQUE, SENHA TEXT, SALDO NUMBER, INVESTIMENTOS NUMBER)";
+        String sql = "CREATE TABLE TB_USUARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT , NOME TEXT, EMAIL TEXT UNIQUE , CPF TEXT UNIQUE, SALDO NUMBER, INVESTIMENTOS NUMBER, IDFIREBASEUSER STRING)";
         db.execSQL(sql);
     }
 
@@ -41,6 +41,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
     }
 
 
+
+
     public long adicionarUsuario (Usuario usuario){
 
         ContentValues valores = buildContentValues(usuario);
@@ -50,8 +52,8 @@ public class UsuarioDAO extends SQLiteOpenHelper{
         return insert;
     }
 
-    public void apagar (int codigo){
-        getWritableDatabase().delete("TB_USUARIO", "ID = ?", new String[]{String.valueOf(codigo)});
+    public void apagar (String email){
+        getWritableDatabase().delete("TB_USUARIO", "EMAIL = ?", new String[]{String.valueOf(email)});
     }
 
     public Usuario buscarUsuario(String email){
@@ -62,37 +64,37 @@ public class UsuarioDAO extends SQLiteOpenHelper{
         int codigo = cursor.getInt(0);
         String nome = cursor.getString(1);
         String cpf = cursor.getString(3);
-        String senha = cursor.getString(4);
-        Long saldo = cursor.getLong(5);
-        Long investimentos = cursor.getLong(6);
+        Long saldo = cursor.getLong(4);
+        Long investimentos = cursor.getLong(5);
+        String idFirebaseUsuario = cursor.getString(6);
 
-        Usuario usuario = new Usuario(codigo,nome,email,cpf,senha,saldo,investimentos);
+        Usuario usuario = new Usuario(codigo,nome,email,cpf,saldo,investimentos,idFirebaseUsuario);
         return (usuario);
-
-        /*
-
-        Cursor cursor = getReadableDatabase().query("TB_USUARIO",null,null,null,null,null,null);
-
-        while(cursor.moveToNext()){
-            String emailUsuario = cursor.getString(2);
-
-            if(email.equals(emailUsuario)){
-                int codigo = cursor.getInt(0);
-                String nome = cursor.getString(1);
-                String cpf = cursor.getString(3);
-                String senha = cursor.getString(4);
-                Long saldo = cursor.getLong(5);
-                Long investimentos = cursor.getLong(6);
-                Usuario usuario = new Usuario(codigo,nome,email,cpf,senha,saldo,investimentos);
-                return(usuario);
-            }
-
-            */
-
-
 
         }
 
+        public void atualizar (Usuario usuario){
+            ContentValues valores = buildContentValues(usuario);
+            getWritableDatabase().update("TB_USUARIO",valores,"EMAIL = ?",new String[]{String.valueOf(usuario.getEmailUsuario())});
+        }
+
+
+    @NonNull
+    private ContentValues buildContentValues(Usuario usuario) {
+        ContentValues valores = new ContentValues();
+        valores.put("NOME",usuario.getNomeUsuario());
+        valores.put("EMAIL",usuario.getEmailUsuario());
+        valores.put("CPF",usuario.getCpfUsuario());
+        valores.put("SALDO", usuario.getSaldoUsuario());
+        valores.put("INVESTIMENTOS",usuario.getInvestimentoUsuario());
+        valores.put("IDFIREBASEUSER",usuario.getIdFirebaseUsuario());
+        valores.put("ID",usuario.getIdUsuario());
+        return valores;
+    }
+}
+
+
+//OLD CODE:
 
 
         /*
@@ -112,22 +114,22 @@ public class UsuarioDAO extends SQLiteOpenHelper{
         return lista;
 
         */
+        /*
 
-        public void atualizar (Usuario usuario){
-            ContentValues valores = buildContentValues(usuario);
-            getWritableDatabase().update("TB_USUARIO",valores,"ID = ?",new String[]{String.valueOf(usuario.getIdUsuario())});
-        }
+        Cursor cursor = getReadableDatabase().query("TB_USUARIO",null,null,null,null,null,null);
 
+        while(cursor.moveToNext()){
+            String emailUsuario = cursor.getString(2);
 
-    @NonNull
-    private ContentValues buildContentValues(Usuario usuario) {
-        ContentValues valores = new ContentValues();
-        valores.put("NOME",usuario.getNomeUsuario());
-        valores.put("EMAIL",usuario.getEmailUsuario());
-        valores.put("CPF",usuario.getCpfUsuario());
-        valores.put("SENHA",usuario.getSenhaUsuario());
-        valores.put("SALDO", usuario.getSaldoUsuario());
-        valores.put("INVESTIMENTOS",usuario.getInvestimentoUsuario());
-        return valores;
-    }
-}
+            if(email.equals(emailUsuario)){
+                int codigo = cursor.getInt(0);
+                String nome = cursor.getString(1);
+                String cpf = cursor.getString(3);
+                String senha = cursor.getString(4);
+                Long saldo = cursor.getLong(5);
+                Long investimentos = cursor.getLong(6);
+                Usuario usuario = new Usuario(codigo,nome,email,cpf,senha,saldo,investimentos);
+                return(usuario);
+            }
+
+            */

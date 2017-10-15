@@ -31,9 +31,11 @@ public class CadastroActivity extends AppCompatActivity {
     private Button btnCadastrarCadastro;
 
     private static final String TAG = "CadastroActivity";
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private UsuarioDAO dao;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,34 +75,28 @@ public class CadastroActivity extends AppCompatActivity {
 
     protected void cadastrarUsuario(View v){
 
-        Usuario usuario = new Usuario();
-        usuario.setNomeUsuario(edtNomeCadastro.getText().toString());
-        usuario.setEmailUsuario(edtEmailCadastro.getText().toString());
-        usuario.setCpfUsuario(edtCpfCadastro.getText().toString());
-        usuario.setSenhaUsuario(edtSenhaCadastro.getText().toString());
+        String nomeUsuario = edtNomeCadastro.getText().toString();
+        String emailUsuario = edtEmailCadastro.getText().toString();
+        String cpfUsuario = edtCpfCadastro.getText().toString();
+        String senhaUsuario = edtSenhaCadastro.getText().toString();
 
-        UsuarioDAO dao = new UsuarioDAO(this);
-        long linhaUsuario;
+        usuario = new Usuario();
+        usuario.setNomeUsuario(nomeUsuario);
+        usuario.setEmailUsuario(emailUsuario);
+        usuario.setCpfUsuario(cpfUsuario);
 
+        dao = new UsuarioDAO(this);
 
-        if(validarCampos(usuario)){
+        if(validarCampos(usuario,senhaUsuario)){
             try{
-
-
-                /*linhaUsuario = dao.adicionarUsuario(usuario);
-
-                if(linhaUsuario == -1)
-                {
-                    chamarAlerta("Erro!","Usuário já cadastrado!");
-                }else{
-                */
-                    mAuth.createUserWithEmailAndPassword(usuario.getEmailUsuario(),usuario.getSenhaUsuario())
+                    mAuth.createUserWithEmailAndPassword(emailUsuario,senhaUsuario)
                         .addOnCompleteListener(this,new OnCompleteListener<AuthResult>(){
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()) {
                                     Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
                                     chamarAlerta("Sucesso!","Usuário adicionado com sucesso!");
+                                    dao.adicionarUsuario(usuario);
                                 }else{
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
@@ -114,20 +110,18 @@ public class CadastroActivity extends AppCompatActivity {
                         });
 
 
-                   // chamarAlerta("Sucesso!","Usuário adicionado com sucesso!");
-                //}
 
-                //this.finish();
+
             }catch (Exception e){
-            //chamarAlerta("Erro!", "Ocorreu um erro" + e.toString());
+
         }
         }
 
 
     }
 
-    protected boolean validarCampos(Usuario usuario){
-        if(usuario.getNomeUsuario().equals("") && usuario.getEmailUsuario().equals("") && usuario.getCpfUsuario().equals("") && usuario.getSenhaUsuario().equals("")){
+    protected boolean validarCampos(Usuario usuario, String senhaUsuario){
+        if(usuario.getNomeUsuario().equals("") && usuario.getEmailUsuario().equals("") && usuario.getCpfUsuario().equals("") && senhaUsuario.equals("")){
             chamarAlerta("Erro!","Por favor preencha todos os campos");
         }else{
             if(usuario.getNomeUsuario().equals("")) {
@@ -139,13 +133,13 @@ public class CadastroActivity extends AppCompatActivity {
                     if(usuario.getCpfUsuario().equals("")){
                         chamarAlerta("Erro!", "Por favor digite um CPF!");
                     }else{
-                        if(usuario.getSenhaUsuario().equals("")) {
+                        if(senhaUsuario.equals("")) {
                             chamarAlerta("Erro!", "Por favor digite uma senha!");
                         }else {
                             if (!usuario.getEmailUsuario().contains("@")) {
                                 chamarAlerta("Erro!", "Por favor digite um e-mail válido");
                             } else {
-                                if (usuario.getSenhaUsuario().length() < 6) {
+                                if (senhaUsuario.length() < 6) {
                                     chamarAlerta("Erro!", "Por favor digite uma senha com mais de 6 caracteres");
                                 } else {
                                     return true;
@@ -200,3 +194,20 @@ public class CadastroActivity extends AppCompatActivity {
         }
     }
 }
+
+//OLD CODE
+
+//chamarAlerta("Erro!", "Ocorreu um erro" + e.toString());
+
+// chamarAlerta("Sucesso!","Usuário adicionado com sucesso!");
+//}
+
+//this.finish();
+
+                /*linhaUsuario = dao.adicionarUsuario(usuario);
+
+                if(linhaUsuario == -1)
+                {
+                    chamarAlerta("Erro!","Usuário já cadastrado!");
+                }else{
+                */

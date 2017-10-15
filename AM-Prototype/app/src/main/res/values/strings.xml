@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AM-MoneyInvest</string>
+    <string name="app_name">Money Invest</string>
 
     <string name="title_activity_opening">OpeningActivity</string>
     <string name="dummy_button">Dummy Button</string>
