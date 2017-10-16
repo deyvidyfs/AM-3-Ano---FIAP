@@ -82,7 +82,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/resgatar"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:onClick="resgatarPoupanca"/>
 
         </LinearLayout>
 
@@ -124,7 +125,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/resgatar"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5"
+                android:onClick="resgatarTesouro"/>
 
         </LinearLayout>
 
@@ -166,7 +168,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/resgatar"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5"
+                android:onClick="resgatarCdb"/>
 
         </LinearLayout>
 

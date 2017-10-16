@@ -126,7 +126,7 @@ public class CadastroActivity extends AppCompatActivity {
 
 
                 }catch (Exception e){
-
+                        chamarAlerta("Erro", "Ocorreu um erro" + e.toString());
                 }
             }
         }else{

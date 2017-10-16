@@ -56,7 +56,7 @@ public class SaldoActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Digite o valor desejado");
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         builder.setView(input);
         builder.setCancelable(true);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -86,27 +86,39 @@ public class SaldoActivity extends AppCompatActivity {
         long saldoAntigo;
         long saldoNovo;
         saldoAdicionado = Long.parseLong(input.getText().toString());
-        saldoAntigo = usuario.getSaldoUsuario();
 
-        //RecarregarSaldo
-        saldoNovo = saldoAntigo + saldoAdicionado;
+        if(saldoAdicionado > 0 ){
+            saldoAntigo = usuario.getSaldoUsuario();
+
+            //RecarregarSaldo
+            saldoNovo = saldoAntigo + saldoAdicionado;
 
 
-        usuario.setSaldoUsuario(saldoNovo);
-        dao.atualizar(usuario);
+            usuario.setSaldoUsuario(saldoNovo);
+            dao.atualizar(usuario);
 
-        Transacao transacao = new Transacao();
+            Transacao transacao = new Transacao();
 
-        transacao.setDataTransacao(GregorianCalendar.getInstance().getTime().toString());
-        transacao.setValorTransacao(saldoAdicionado);
-        transacao.setTipoTransacao("Saldo");
-        transacao.setNomeInvestimentoTransacao("Aplicacao");
-        transacao.setIdUsuarioTransacao(usuario.getIdUsuario());
+            transacao.setDataTransacao(GregorianCalendar.getInstance().getTime().toString());
+            transacao.setValorTransacao(saldoAdicionado);
+            transacao.setTipoTransacao("Saldo");
+            transacao.setNomeInvestimentoTransacao("Aplicacao");
+            transacao.setIdUsuarioTransacao(usuario.getIdUsuario());
 
-        TransacaoDAO transacaoDao = new TransacaoDAO(this);
-        transacaoDao.adicionarTransacao(transacao);
+            TransacaoDAO transacaoDao = new TransacaoDAO(this);
+            transacaoDao.adicionarTransacao(transacao);
 
-        txtSaldo.setText("RS " + saldoNovo);
+            txtSaldo.setText("RS " + saldoNovo);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Erro");
+            builder.setMessage("Você não pode adicionar um saldo negativo");
+            builder.setCancelable(true);
+            builder.setPositiveButton("OK",null);
+            builder.show();
+        }
+
+
 
     }
 }

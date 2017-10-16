@@ -20,7 +20,7 @@ import java.util.List;
 public class UsuarioDAO extends SQLiteOpenHelper{
 
     private static final String BANCO = "usuarios";
-    private static final int VERSAO = 6;
+    private static final int VERSAO = 7;
 
     public UsuarioDAO (Context context){
         super(context,BANCO,null,VERSAO);
@@ -29,7 +29,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE TB_USUARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT , NOME TEXT, EMAIL TEXT UNIQUE , CPF TEXT UNIQUE, SALDO NUMBER, INVESTIMENTOS NUMBER, IDFIREBASEUSER STRING, SALDOPOUPANCA NUMBER, SALDOTESOURO NUMBER, SALDOCDB NUMBER)";
+        String sql = "CREATE TABLE TB_USUARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT , NOME TEXT, EMAIL TEXT UNIQUE , CPF TEXT, SALDO NUMBER, INVESTIMENTOS NUMBER, IDFIREBASEUSER STRING, SALDOPOUPANCA NUMBER, SALDOTESOURO NUMBER, SALDOCDB NUMBER)";
         db.execSQL(sql);
     }
 

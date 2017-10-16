@@ -39,11 +39,11 @@ public class ResgatarInvestimentosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_investir);
+        setContentView(R.layout.activity_resgatar_investimentos);
 
         txtSaldoResInv = (TextView) findViewById(R.id.txtSaldoResInv);
-        txtSaldoPoupancaResInv = (TextView) findViewById(R.id.txtSaldoResInv);
-        txtSaldoTesouroResInv = (TextView) findViewById(R.id.txtSaldoResInv);
+        txtSaldoPoupancaResInv = (TextView) findViewById(R.id.txtSaldoPoupancaResInv);
+        txtSaldoTesouroResInv = (TextView) findViewById(R.id.txtSaldoTesouroResInv);
         txtSaldoCdbResInv = (TextView) findViewById(R.id.txtSaldoCdbResInv);
 
         btnPoupancaResInv = (Button) findViewById(R.id.btnPoupancaResInv);
@@ -59,12 +59,10 @@ public class ResgatarInvestimentosActivity extends AppCompatActivity {
         String usuarioSrc = i.getStringExtra("emailUsuario");
         usuario = usuarioDao.buscarUsuario(usuarioSrc);
 
-        chamarAlerta("Saldo", "R$ " + usuario.getSaldoUsuario());
+        //chamarAlerta("Saldo", "R$ " + usuario.getSaldoUsuario());
 
         txtSaldoResInv.setText("R$ "  + usuario.getSaldoUsuario());
-
         txtSaldoPoupancaResInv.setText("R$ " + usuario.getSaldoPoupancaUsuario());
-
         txtSaldoTesouroResInv.setText("R$ " + usuario.getSaldoTesouroUsuario());
         txtSaldoCdbResInv.setText("R$ " + usuario.getSaldoCdbUsuario());
 
@@ -97,14 +95,14 @@ public class ResgatarInvestimentosActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Digite o valor desejado");
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         builder.setView(input);
         builder.setCancelable(true);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try{
-                    validarTransacao(input,origem);
+                    validarTransacao(input);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -114,45 +112,50 @@ public class ResgatarInvestimentosActivity extends AppCompatActivity {
         builder.show();
     }
 
-    protected void validarTransacao(EditText input,String origem){
+    protected void validarTransacao(EditText input){
         long saldoResgatado;
 
 
         saldoResgatado = Long.parseLong(input.getText().toString());
 
 
-
-
-        if(origem.equals("Poupanca")){
-            if(saldoResgatado <= usuario.getSaldoPoupancaUsuario()){
-                usuario.setSaldoPoupancaUsuario(usuario.getSaldoPoupancaUsuario() - saldoResgatado);
-                txtSaldoPoupancaResInv.setText("R$ " + usuario.getSaldoPoupancaUsuario());
-                realizarTransacao(saldoResgatado);
-            }else{
-                chamarAlerta("Erro","O saldo resgatado deve ser menor ou igual ao seu investimento");
-            }
-        }else{
-            if(origem.equals("Tesouro")){
-                if(saldoResgatado <= usuario.getSaldoTesouroUsuario()){
-                    usuario.setSaldoTesouroUsuario(usuario.getSaldoTesouroUsuario() - saldoResgatado);
-                    txtSaldoTesouroResInv.setText("R$ " + usuario.getSaldoTesouroUsuario());
+        if(saldoResgatado > 0){
+            if(origem.equals("Poupanca")){
+                if(saldoResgatado <= usuario.getSaldoPoupancaUsuario()){
+                    usuario.setSaldoPoupancaUsuario(usuario.getSaldoPoupancaUsuario() - saldoResgatado);
+                    txtSaldoPoupancaResInv.setText("R$ " + usuario.getSaldoPoupancaUsuario());
                     realizarTransacao(saldoResgatado);
                 }else{
                     chamarAlerta("Erro","O saldo resgatado deve ser menor ou igual ao seu investimento");
                 }
             }else{
-                if(origem.equals("Cdb")){
-                    if(saldoResgatado <= usuario.getSaldoCdbUsuario()){
-                        usuario.setSaldoCdbUsuario(usuario.getSaldoCdbUsuario() - saldoResgatado);
-                        txtSaldoCdbResInv.setText("R$ " + usuario.getSaldoCdbUsuario());
+                if(origem.equals("Tesouro")){
+                    if(saldoResgatado <= usuario.getSaldoTesouroUsuario()){
+                        usuario.setSaldoTesouroUsuario(usuario.getSaldoTesouroUsuario() - saldoResgatado);
+                        txtSaldoTesouroResInv.setText("R$ " + usuario.getSaldoTesouroUsuario());
                         realizarTransacao(saldoResgatado);
                     }else{
                         chamarAlerta("Erro","O saldo resgatado deve ser menor ou igual ao seu investimento");
                     }
+                }else{
+                    if(origem.equals("Cdb")){
+                        if(saldoResgatado <= usuario.getSaldoCdbUsuario()){
+                            usuario.setSaldoCdbUsuario(usuario.getSaldoCdbUsuario() - saldoResgatado);
+                            txtSaldoCdbResInv.setText("R$ " + usuario.getSaldoCdbUsuario());
+                            realizarTransacao(saldoResgatado);
+                        }else{
+                            chamarAlerta("Erro","O saldo resgatado deve ser menor ou igual ao seu investimento");
+                        }
 
+                    }
                 }
             }
+        }else{
+            chamarAlerta("Erro","Você não pode resgatar um saldo negativo");
         }
+
+
+
 
 
 

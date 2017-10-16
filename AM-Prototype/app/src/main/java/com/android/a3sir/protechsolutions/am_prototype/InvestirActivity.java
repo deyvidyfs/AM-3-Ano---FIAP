@@ -71,7 +71,7 @@ public class InvestirActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Digite o valor desejado");
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER |InputType.TYPE_NUMBER_FLAG_DECIMAL);
         builder.setView(input);
         builder.setCancelable(true);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -94,47 +94,58 @@ public class InvestirActivity extends AppCompatActivity {
         long saldoNovo;
 
         saldoInvestido = Long.parseLong(input.getText().toString());
-        saldoAntigo = usuario.getSaldoUsuario();
 
-        if(saldoInvestido <= saldoAntigo){
-            saldoNovo = saldoAntigo - saldoInvestido;
+        if(saldoInvestido > 0){
+            saldoAntigo = usuario.getSaldoUsuario();
 
-            usuario.setSaldoUsuario(saldoNovo);
+            if(saldoInvestido <= saldoAntigo){
+                saldoNovo = saldoAntigo - saldoInvestido;
 
-            if(origem.equals("Poupanca")){
-                usuario.setSaldoPoupancaUsuario(usuario.getSaldoPoupancaUsuario() + saldoInvestido);
-            }else{
-                if(origem.equals("Tesouro")){
-                    usuario.setSaldoTesouroUsuario(usuario.getSaldoTesouroUsuario() + saldoInvestido);
+                usuario.setSaldoUsuario(saldoNovo);
+
+                if(origem.equals("Poupanca")){
+                    usuario.setSaldoPoupancaUsuario(usuario.getSaldoPoupancaUsuario() + saldoInvestido);
                 }else{
-                    if(origem.equals("Cdb")){
-                        usuario.setSaldoCdbUsuario(usuario.getSaldoCdbUsuario() + saldoInvestido);
+                    if(origem.equals("Tesouro")){
+                        usuario.setSaldoTesouroUsuario(usuario.getSaldoTesouroUsuario() + saldoInvestido);
+                    }else{
+                        if(origem.equals("Cdb")){
+                            usuario.setSaldoCdbUsuario(usuario.getSaldoCdbUsuario() + saldoInvestido);
+                        }
                     }
                 }
+
+                usuarioDao.atualizar(usuario);
+
+                Transacao transacao = new Transacao();
+
+                transacao.setDataTransacao(GregorianCalendar.getInstance().getTime().toString());
+                transacao.setValorTransacao(saldoInvestido);
+                transacao.setTipoTransacao("Investimento");
+                transacao.setNomeInvestimentoTransacao(origem + "- Aplicacao");
+                transacao.setIdUsuarioTransacao(usuario.getIdUsuario());
+
+                TransacaoDAO transacaoDao = new TransacaoDAO(this);
+                transacaoDao.adicionarTransacao(transacao);
+
+                txtSaldoInvestir.setText("RS " + saldoNovo);
+            }else{
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Erro");
+                builder.setMessage("O valor investido deve ser menor ou igual ao seu Saldo");
+                builder.setCancelable(true);
+                builder.setPositiveButton("OK",null);
+                builder.show();
             }
-
-            usuarioDao.atualizar(usuario);
-
-            Transacao transacao = new Transacao();
-
-            transacao.setDataTransacao(GregorianCalendar.getInstance().getTime().toString());
-            transacao.setValorTransacao(saldoInvestido);
-            transacao.setTipoTransacao("Investimento");
-            transacao.setNomeInvestimentoTransacao(origem + "- Aplicacao");
-            transacao.setIdUsuarioTransacao(usuario.getIdUsuario());
-
-            TransacaoDAO transacaoDao = new TransacaoDAO(this);
-            transacaoDao.adicionarTransacao(transacao);
-
-            txtSaldoInvestir.setText("RS " + saldoNovo);
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Erro");
-            builder.setMessage("O valor investido deve ser menor ou igual ao seu Saldo");
+            builder.setMessage("Você não pode investir um saldo negativo");
             builder.setCancelable(true);
             builder.setPositiveButton("OK",null);
             builder.show();
         }
+
 
 
 
