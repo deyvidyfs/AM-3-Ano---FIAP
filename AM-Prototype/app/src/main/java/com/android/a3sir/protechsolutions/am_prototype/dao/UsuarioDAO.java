@@ -20,7 +20,7 @@ import java.util.List;
 public class UsuarioDAO extends SQLiteOpenHelper{
 
     private static final String BANCO = "usuarios";
-    private static final int VERSAO = 5;
+    private static final int VERSAO = 6;
 
     public UsuarioDAO (Context context){
         super(context,BANCO,null,VERSAO);
@@ -29,7 +29,7 @@ public class UsuarioDAO extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE TB_USUARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT , NOME TEXT, EMAIL TEXT UNIQUE , CPF TEXT UNIQUE, SALDO NUMBER, INVESTIMENTOS NUMBER, IDFIREBASEUSER STRING)";
+        String sql = "CREATE TABLE TB_USUARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT , NOME TEXT, EMAIL TEXT UNIQUE , CPF TEXT UNIQUE, SALDO NUMBER, INVESTIMENTOS NUMBER, IDFIREBASEUSER STRING, SALDOPOUPANCA NUMBER, SALDOTESOURO NUMBER, SALDOCDB NUMBER)";
         db.execSQL(sql);
     }
 
@@ -67,8 +67,11 @@ public class UsuarioDAO extends SQLiteOpenHelper{
         Long saldo = cursor.getLong(4);
         Long investimentos = cursor.getLong(5);
         String idFirebaseUsuario = cursor.getString(6);
+        Long saldoPoupanca = cursor.getLong(7);
+        Long saldoTesouro = cursor.getLong(8);
+        Long saldoCdb = cursor.getLong(9);
 
-        Usuario usuario = new Usuario(codigo,nome,email,cpf,saldo,investimentos,idFirebaseUsuario);
+        Usuario usuario = new Usuario(codigo,nome,email,cpf,saldo,investimentos,idFirebaseUsuario, saldoPoupanca, saldoTesouro, saldoCdb);
         return (usuario);
 
         }
@@ -89,6 +92,9 @@ public class UsuarioDAO extends SQLiteOpenHelper{
         valores.put("INVESTIMENTOS",usuario.getInvestimentoUsuario());
         valores.put("IDFIREBASEUSER",usuario.getIdFirebaseUsuario());
         valores.put("ID",usuario.getIdUsuario());
+        valores.put("SALDOPOUPANCA",usuario.getSaldoPoupancaUsuario());
+        valores.put("SALDOTESOURO",usuario.getSaldoTesouroUsuario());
+        valores.put("SALDOCDB",usuario.getSaldoCdbUsuario());
         return valores;
     }
 }

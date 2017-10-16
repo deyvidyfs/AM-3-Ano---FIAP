@@ -3,6 +3,7 @@ package com.android.a3sir.protechsolutions.am_prototype;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.a3sir.protechsolutions.am_prototype.Models.Usuario;
@@ -29,6 +31,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText edtSenhaCadastro;
     private TextView txtTituloCadasto;
     private Button btnCadastrarCadastro;
+    private ImageView imgUserCadastro;
 
     private static final String TAG = "CadastroActivity";
     private FirebaseAuth mAuth;
@@ -36,6 +39,9 @@ public class CadastroActivity extends AppCompatActivity {
 
     private UsuarioDAO dao;
     private Usuario usuario;
+    private String usuarioSrc;
+
+    private String origem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,13 @@ public class CadastroActivity extends AppCompatActivity {
         edtSenhaCadastro = (EditText) findViewById(R.id.edtSenhaCadastro);
         txtTituloCadasto = (TextView) findViewById(R.id.txtTituloCadastro) ;
         btnCadastrarCadastro = (Button) findViewById(R.id.btnCadastrarCadastro);
+        imgUserCadastro = (ImageView) findViewById(R.id.imgUserCadastro);
 
         Intent i = getIntent();
-        String origem = i.getStringExtra("origem");
+        origem = i.getStringExtra("origem");
+        usuarioSrc = i.getStringExtra("emailUsuario");
 
-        colocarNomesDinamicos(origem);
+        colocarNomesDinamicos();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -71,53 +79,80 @@ public class CadastroActivity extends AppCompatActivity {
             }
         };
 
+        if(origem.equals("Menu")){
+            editarDados();
+        }
+
     }
 
     protected void cadastrarUsuario(View v){
 
-        String nomeUsuario = edtNomeCadastro.getText().toString();
-        String emailUsuario = edtEmailCadastro.getText().toString();
-        String cpfUsuario = edtCpfCadastro.getText().toString();
-        String senhaUsuario = edtSenhaCadastro.getText().toString();
+        if(origem.equals("Main")){
+            String nomeUsuario = edtNomeCadastro.getText().toString();
+            String emailUsuario = edtEmailCadastro.getText().toString();
+            String cpfUsuario = edtCpfCadastro.getText().toString();
+            String senhaUsuario = edtSenhaCadastro.getText().toString();
 
-        usuario = new Usuario();
-        usuario.setNomeUsuario(nomeUsuario);
-        usuario.setEmailUsuario(emailUsuario);
-        usuario.setCpfUsuario(cpfUsuario);
+            usuario = new Usuario();
+            usuario.setNomeUsuario(nomeUsuario);
+            usuario.setEmailUsuario(emailUsuario);
+            usuario.setCpfUsuario(cpfUsuario);
 
-        dao = new UsuarioDAO(this);
+            dao = new UsuarioDAO(this);
 
-        if(validarCampos(usuario,senhaUsuario)){
-            try{
+            if(validarCampos(usuario,senhaUsuario)){
+                try{
                     mAuth.createUserWithEmailAndPassword(emailUsuario,senhaUsuario)
-                        .addOnCompleteListener(this,new OnCompleteListener<AuthResult>(){
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()) {
-                                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-                                    chamarAlerta("Sucesso!","Usuário adicionado com sucesso!");
-                                    dao.adicionarUsuario(usuario);
-                                }else{
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    chamarAlerta("Erro!","Usuário já cadastrado!");
+                            .addOnCompleteListener(this,new OnCompleteListener<AuthResult>(){
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()) {
+                                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                                        chamarAlerta("Sucesso!","Usuário adicionado com sucesso!");
+                                        dao.adicionarUsuario(usuario);
+                                    }else{
+                                        // If sign in fails, display a message to the user. If sign in succeeds
+                                        // the auth state listener will be notified and logic to handle the
+                                        // signed in user can be handled in the listener.
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                        chamarAlerta("Erro!","Usuário já cadastrado!");
+                                    }
+
+                                    // ...
                                 }
-
-                                // ...
-                            }
-                        });
+                            });
 
 
 
 
-            }catch (Exception e){
+                }catch (Exception e){
 
+                }
+            }
+        }else{
+            this.finish();
         }
-        }
 
 
+    }
+
+    private void editarDados(){
+        UsuarioDAO dao = new UsuarioDAO(this);
+        usuario = dao.buscarUsuario(usuarioSrc);
+
+        edtNomeCadastro.setText(usuario.getNomeUsuario());
+        edtNomeCadastro.setFocusable(false);
+
+        edtEmailCadastro.setText(usuario.getEmailUsuario());
+        edtEmailCadastro.setFocusable(false);
+
+        edtCpfCadastro.setText(usuario.getCpfUsuario());
+        edtCpfCadastro.setFocusable(false);
+
+        edtSenhaCadastro.setText("");
+        edtSenhaCadastro.setFocusable(false);
+
+        imgUserCadastro.setVisibility(View.VISIBLE);
     }
 
     protected boolean validarCampos(Usuario usuario, String senhaUsuario){
@@ -177,14 +212,14 @@ public class CadastroActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private void colocarNomesDinamicos(String origem){
+    private void colocarNomesDinamicos(){
         if(origem.equals("Main")){
             txtTituloCadasto.setText("Novo Cadastro:");
             btnCadastrarCadastro.setText("Cadastrar");
         }else{
             if(origem.equals("Menu")){
                 txtTituloCadasto.setText("Editar Cadastro:");
-                btnCadastrarCadastro.setText("Atualizar");
+                btnCadastrarCadastro.setText("Sair");
 
                 edtCpfCadastro.setFocusable(false);
                 edtCpfCadastro.setInputType(InputType.TYPE_NULL);

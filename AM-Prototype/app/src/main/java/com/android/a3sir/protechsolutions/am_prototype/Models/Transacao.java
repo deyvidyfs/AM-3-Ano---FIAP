@@ -8,18 +8,20 @@ public class Transacao {
 
     public int idTransacao;
     public String tipoTransacao;
-    public int idInvestimentoTransacao;
+    public String nomeInvestimentoTransacao;
     public int idUsuarioTransacao;
-    public long valor;
+    public long valorTransacao;
+    public String dataTransacao;
 
     public Transacao(){}
 
-    public Transacao(int idTransacao, String tipoTransacao, int idInvestimentoTransacao, int idUsuarioTransacao, long valor) {
+    public Transacao(int idTransacao, String tipoTransacao, String nomeInvestimentoTransacao, int idUsuarioTransacao, long valorTransacao, String dataTransacao) {
         this.idTransacao = idTransacao;
         this.tipoTransacao = tipoTransacao;
-        this.idInvestimentoTransacao = idInvestimentoTransacao;
+        this.nomeInvestimentoTransacao = nomeInvestimentoTransacao;
         this.idUsuarioTransacao = idUsuarioTransacao;
-        this.valor = valor;
+        this.valorTransacao = valorTransacao;
+        this.dataTransacao = dataTransacao;
     }
 
     public int getIdTransacao() {
@@ -38,12 +40,12 @@ public class Transacao {
         this.tipoTransacao = tipoTransacao;
     }
 
-    public int getIdInvestimentoTransacao() {
-        return idInvestimentoTransacao;
+    public String getNomeInvestimentoTransacao() {
+        return nomeInvestimentoTransacao;
     }
 
-    public void setIdInvestimentoTransacao(int idInvestimentoTransacao) {
-        this.idInvestimentoTransacao = idInvestimentoTransacao;
+    public void setNomeInvestimentoTransacao(String nomeInvestimentoTransacao) {
+        this.nomeInvestimentoTransacao = nomeInvestimentoTransacao;
     }
 
     public int getIdUsuarioTransacao() {
@@ -54,11 +56,20 @@ public class Transacao {
         this.idUsuarioTransacao = idUsuarioTransacao;
     }
 
-    public long getValor() {
-        return valor;
+    public long getValorTransacao() {
+        return valorTransacao;
     }
 
-    public void setValor(long valor) {
-        this.valor = valor;
+    public void setValorTransacao(long valorTransacao) {
+        this.valorTransacao = valorTransacao;
     }
+
+    public String getDataTransacao() {
+        return dataTransacao;
+    }
+
+    public void setDataTransacao(String dataTransacao) {
+        this.dataTransacao = dataTransacao;
+    }
+
 }

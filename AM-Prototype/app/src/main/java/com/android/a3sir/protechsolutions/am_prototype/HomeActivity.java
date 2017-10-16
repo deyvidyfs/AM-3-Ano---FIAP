@@ -113,37 +113,7 @@ public class HomeActivity extends AppCompatActivity {
         txtInvestHome.setText("Saldo Investido Total: R$ " + usuario.getInvestimentoUsuario());
     }
 
-    @Override
-    protected void onDestroy(){
-
-
-        mAuth.signOut();
-
-        super.onDestroy();
-    }
-
-
-    protected void investir (View v){
-        Intent intent = new Intent(this, InvestirActivity.class);
-        intent.putExtra("saldo",usuario.getSaldoUsuario());
-        intent.putExtra("idUsuario",usuario.getIdUsuario());
-        startActivity(intent);
-    }
-
-    protected void resgatarInvestimentos (View v){
-        Intent intent = new Intent(this, ResgatarInvestimentosActivity.class);
-        startActivity(intent);
-    }
-
-    protected void meusInvestimentos (View v){
-        Intent intent = new Intent(this, InvestimentosActivity.class);
-        intent.putExtra("saldo",usuario.getSaldoUsuario());
-        intent.putExtra("idUsuario",usuario.getIdUsuario());
-        startActivity(intent);
-    }
-
-    protected void acessarChatbot (View v){
-
+    protected void sair(View v){
         if(idUsuarioFirebase == 0){
             usuario.setIdUsuario(databaseLength);
             dao.atualizar(usuario);
@@ -164,16 +134,40 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
 
+        mAuth.signOut();
 
-        /*
+        this.finish();
+    }
+
+    protected void investir (View v){
+        Intent intent = new Intent(this, InvestirActivity.class);
+        intent.putExtra("emailUsuario",usuario.getEmailUsuario());
+        startActivity(intent);
+    }
+
+    protected void resgatarInvestimentos (View v){
+        Intent intent = new Intent(this, ResgatarInvestimentosActivity.class);
+        intent.putExtra("emailUsuario",usuario.getEmailUsuario());
+        startActivity(intent);
+    }
+
+    protected void meusInvestimentos (View v){
+        Intent intent = new Intent(this, InvestimentosActivity.class);
+        intent.putExtra("emailUsuario",usuario.getEmailUsuario());
+        startActivity(intent);
+    }
+
+    protected void acessarChatbot (View v){
+
         Intent intent = new Intent(this, ChatbotActivity.class);
         startActivity(intent);
-        */
+
     }
 
     protected void acessarCadastro (View v){
         Intent intent = new Intent(this, CadastroActivity.class);
         intent.putExtra("origem","Menu");
+        intent.putExtra("emailUsuario", usuario.getEmailUsuario());
         startActivity(intent);
     }
 

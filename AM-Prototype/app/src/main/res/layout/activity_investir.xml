@@ -34,32 +34,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R$ 0"
+            android:text=""
             android:textSize="18sp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:id="@+id/txtSaldoInvestir"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:text="Poupança"
+            android:text="@string/poupanca"
             android:layout_marginTop="20dp"
-            android:id="@+id/btnI1Investir"/>
+            android:id="@+id/btnPoupancaInvestir"
+            android:onClick="investirPoupanca"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:text="Tesouro Direto"
+            android:text="@string/tesouro_direto"
             android:layout_marginTop="10dp"
-            android:id="@+id/btnI2Investir"/>
+            android:id="@+id/btnTesouroInvestir"
+            android:onClick="investirTesouro"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:text="CDB"
+            android:text="@string/cdb"
             android:layout_marginTop="10dp"
-            android:id="@+id/btnI3Investir"/>
+            android:id="@+id/btnCdbInvestir"
+            android:onClick="investirCdb"/>
 
         <Button
             android:layout_width="wrap_content"

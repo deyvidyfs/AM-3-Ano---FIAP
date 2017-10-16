@@ -34,4 +34,9 @@
     <string name="esqueci_senha">Esqueci minha senha</string>
     <string name="resgatar">Resgatar</string>
     <string name="saldo_indisponivel">Saldo Indisponível</string>
+    <string name="salvar_alteracoes">Salvar Alterações</string>
+    <string name="sair_salvar">Sair e Salvar</string>
+    <string name="cdb">CDB:</string>
+    <string name="tesouro_direto">Tesouro Direto:</string>
+    <string name="poupanca">Poupança:</string>
 </resources>

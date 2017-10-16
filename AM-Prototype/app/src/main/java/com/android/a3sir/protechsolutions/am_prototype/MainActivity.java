@@ -79,9 +79,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onRestart(){
+        super.onRestart();
+        edtEmailUsuario.setText("");
+        edtSenhaUsuario.setText("");
+    }
+
     protected void novoCadastro(View v){
         Intent intent = new Intent(this,CadastroActivity.class);
         intent.putExtra("origem","Main");
+        intent.putExtra("emailUsuario","novo");
         startActivity(intent);
     }
 

@@ -105,12 +105,26 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="65dp"
         android:text="@string/falar_assitente"
         android:id="@+id/btnAssistenteHome"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_gravity="center"
         android:onClick="acessarChatbot"/>
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/sair_salvar"
+        android:id="@+id/btnSalvarAlteracoes"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="center"
+        android:background="@color/red"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:onClick="sair"/>
 
 </android.widget.LinearLayout>

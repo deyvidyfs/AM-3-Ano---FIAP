@@ -8,19 +8,22 @@ import java.util.Map;
  */
 
 public class Usuario {
-    public int idUsuario;
-    public String nomeUsuario;
-    public String emailUsuario;
-    public String cpfUsuario;
-    public long saldoUsuario;
-    public long investimentoUsuario;
-    public String idFirebaseUsuario;
+    private int idUsuario;
+    private String nomeUsuario;
+    private String emailUsuario;
+    private String cpfUsuario;
+    private long saldoUsuario;
+    private long investimentoUsuario;
+    private String idFirebaseUsuario;
+    private long saldoPoupancaUsuario;
+    private long saldoTesouroUsuario;
+    private long saldoCdbUsuario;
 
     public Usuario(){
 
     }
 
-    public Usuario(int idUsuario, String nomeUsuario, String emailUsuario, String cpfUsuario, long saldoUsuario, long investimentoUsuario, String idFirebaseUsuario) {
+    public Usuario(int idUsuario, String nomeUsuario, String emailUsuario, String cpfUsuario, long saldoUsuario, long investimentoUsuario, String idFirebaseUsuario, long saldoPoupancaUsuario, long saldoTesouroUsuario, long saldoCdbUsuario) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.emailUsuario = emailUsuario;
@@ -28,6 +31,9 @@ public class Usuario {
         this.saldoUsuario = saldoUsuario;
         this.investimentoUsuario = investimentoUsuario;
         this.idFirebaseUsuario = idFirebaseUsuario;
+        this.saldoPoupancaUsuario = saldoPoupancaUsuario;
+        this.saldoTesouroUsuario = saldoTesouroUsuario;
+        this.saldoCdbUsuario = saldoCdbUsuario;
     }
 
     public String getIdFirebaseUsuario() {
@@ -86,6 +92,30 @@ public class Usuario {
         this.investimentoUsuario = investimentoUsuario;
     }
 
+    public long getSaldoPoupancaUsuario() {
+        return saldoPoupancaUsuario;
+    }
+
+    public void setSaldoPoupancaUsuario(long saldoPoupancaUsuario) {
+        this.saldoPoupancaUsuario = saldoPoupancaUsuario;
+    }
+
+    public long getSaldoTesouroUsuario() {
+        return saldoTesouroUsuario;
+    }
+
+    public void setSaldoTesouroUsuario(long saldoTesouroUsuario) {
+        this.saldoTesouroUsuario = saldoTesouroUsuario;
+    }
+
+    public long getSaldoCdbUsuario() {
+        return saldoCdbUsuario;
+    }
+
+    public void setSaldoCdbUsuario(long saldoCdbUsuario) {
+        this.saldoCdbUsuario = saldoCdbUsuario;
+    }
+
     public Map<String,Object> toMap(){
         HashMap<String,Object> result = new HashMap<>();
 
@@ -95,6 +125,9 @@ public class Usuario {
         result.put("idUsuario",idUsuario);
         result.put("investimentoUsuario",investimentoUsuario);
         result.put("nomeUsuario",nomeUsuario);
+        result.put("saldoCdbUsuario",saldoCdbUsuario);
+        result.put("saldoPoupancaUsuario",saldoPoupancaUsuario);
+        result.put("saldoTesouroUsuario",saldoTesouroUsuario);
         result.put("saldoUsuario",saldoUsuario);
 
         return result;

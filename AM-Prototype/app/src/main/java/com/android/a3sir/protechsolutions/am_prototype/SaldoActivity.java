@@ -3,6 +3,8 @@ package com.android.a3sir.protechsolutions.am_prototype;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -12,7 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.a3sir.protechsolutions.am_prototype.Models.Transacao;
 import com.android.a3sir.protechsolutions.am_prototype.Models.Usuario;
+import com.android.a3sir.protechsolutions.am_prototype.dao.TransacaoDAO;
 import com.android.a3sir.protechsolutions.am_prototype.dao.UsuarioDAO;
 
 public class SaldoActivity extends AppCompatActivity {
@@ -58,7 +62,12 @@ public class SaldoActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                atualizarSaldo(input);
+                try{
+                    atualizarSaldo(input);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         });
         builder.show();
@@ -84,19 +93,18 @@ public class SaldoActivity extends AppCompatActivity {
 
 
         usuario.setSaldoUsuario(saldoNovo);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("USERID");
-        builder.setMessage(usuario.getIdFirebaseUsuario());
-        builder.setCancelable(true);
-        builder.setPositiveButton("OK",null);
-        builder.show();
-
-
-
         dao.atualizar(usuario);
 
-        Toast.makeText(this,"Saldo atualizado com sucesso",Toast.LENGTH_LONG);
+        Transacao transacao = new Transacao();
+
+        transacao.setDataTransacao(GregorianCalendar.getInstance().getTime().toString());
+        transacao.setValorTransacao(saldoAdicionado);
+        transacao.setTipoTransacao("Saldo");
+        transacao.setNomeInvestimentoTransacao("Aplicacao");
+        transacao.setIdUsuarioTransacao(usuario.getIdUsuario());
+
+        TransacaoDAO transacaoDao = new TransacaoDAO(this);
+        transacaoDao.adicionarTransacao(transacao);
 
         txtSaldo.setText("RS " + saldoNovo);
 
