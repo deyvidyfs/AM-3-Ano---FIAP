@@ -111,6 +111,8 @@ public class HomeActivity extends AppCompatActivity {
         txtNomeHome.setText(usuario.getNomeUsuario());
         txtSaldoHome.setText("Saldo Disponível: R$ " + usuario.getSaldoUsuario());
         txtInvestHome.setText("Saldo Investido Total: R$ " + usuario.getInvestimentoUsuario());
+
+        //chamarAlerta("Status",mAuth.getCurrentUser().toString());
     }
 
     protected void sair(View v){
@@ -160,6 +162,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void acessarChatbot (View v){
 
         Intent intent = new Intent(this, ChatbotActivity.class);
+        intent.putExtra("emailUsuario",usuario.getEmailUsuario());
         startActivity(intent);
 
     }

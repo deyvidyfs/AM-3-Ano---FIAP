@@ -170,6 +170,8 @@ public class ResgatarInvestimentosActivity extends AppCompatActivity {
 
         usuario.setSaldoUsuario(saldoNovo);
 
+        usuario.setInvestimentoUsuario(usuario.getSaldoCdbUsuario() + usuario.getSaldoTesouroUsuario() + usuario.getSaldoPoupancaUsuario());
+
         usuarioDao.atualizar(usuario);
 
         Transacao transacao = new Transacao();

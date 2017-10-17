@@ -11,11 +11,12 @@
 
 
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/user_input_container"
-        android:layout_weight="0.8">
+        android:layout_weight="0.9">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/user_input_container"
-        android:layout_weight="0.2">
+        android:layout_weight="0.1">
 
         <EditText
             android:layout_width="match_parent"
@@ -36,7 +37,10 @@
             android:hint="@string/digite_mensagem"
             android:id="@+id/user_input"
             android:imeOptions="actionDone"
-            android:inputType="textShortMessage"/>
+            android:inputType="textShortMessage" />
     </android.support.design.widget.TextInputLayout>
+
+
+
 
 </android.widget.LinearLayout>

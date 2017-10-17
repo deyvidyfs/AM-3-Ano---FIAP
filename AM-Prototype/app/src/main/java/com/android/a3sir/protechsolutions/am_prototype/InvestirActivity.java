@@ -20,6 +20,10 @@ import com.android.a3sir.protechsolutions.am_prototype.dao.UsuarioDAO;
 public class InvestirActivity extends AppCompatActivity {
 
     private TextView txtSaldoInvestir;
+    private TextView txtSaldoPoupancaInvestir;
+    private TextView txtSaldoTesouroInvestir;
+    private TextView txtSaldoCdbInvestir;
+
     private Button btnPoupancaInvestir;
     private Button btnTesouroInvestir;
     private Button btnCdbInvestir;
@@ -34,6 +38,10 @@ public class InvestirActivity extends AppCompatActivity {
         setContentView(R.layout.activity_investir);
 
         txtSaldoInvestir = (TextView) findViewById(R.id.txtSaldoInvestir);
+        txtSaldoPoupancaInvestir = (TextView) findViewById(R.id.txtSaldoPoupancaInvestir);
+        txtSaldoTesouroInvestir = (TextView) findViewById(R.id.txtSaldoTesouroInvestir);
+        txtSaldoCdbInvestir = (TextView) findViewById(R.id.txtSaldoCdbInvestir);
+
         btnPoupancaInvestir = (Button) findViewById(R.id.btnPoupancaInvestir);
         btnTesouroInvestir = (Button) findViewById(R.id.btnTesouroInvestir);
         btnCdbInvestir = (Button) findViewById(R.id.btnCdbInvestir);
@@ -46,6 +54,9 @@ public class InvestirActivity extends AppCompatActivity {
         usuario = usuarioDao.buscarUsuario(usuarioSrc);
 
         txtSaldoInvestir.setText("R$ " + usuario.getSaldoUsuario());
+        txtSaldoPoupancaInvestir.setText("R$ " + usuario.getSaldoPoupancaUsuario());
+        txtSaldoTesouroInvestir.setText("R$ " + usuario.getSaldoTesouroUsuario());
+        txtSaldoCdbInvestir.setText("R$ " + usuario.getSaldoCdbUsuario());
     }
 
 
@@ -105,15 +116,20 @@ public class InvestirActivity extends AppCompatActivity {
 
                 if(origem.equals("Poupanca")){
                     usuario.setSaldoPoupancaUsuario(usuario.getSaldoPoupancaUsuario() + saldoInvestido);
+                    txtSaldoPoupancaInvestir.setText("R$ " + usuario.getSaldoPoupancaUsuario());
                 }else{
                     if(origem.equals("Tesouro")){
                         usuario.setSaldoTesouroUsuario(usuario.getSaldoTesouroUsuario() + saldoInvestido);
+                        txtSaldoTesouroInvestir.setText("R$ " + usuario.getSaldoTesouroUsuario());
                     }else{
                         if(origem.equals("Cdb")){
                             usuario.setSaldoCdbUsuario(usuario.getSaldoCdbUsuario() + saldoInvestido);
+                            txtSaldoCdbInvestir.setText("R$ " + usuario.getSaldoCdbUsuario());
                         }
                     }
                 }
+
+                usuario.setInvestimentoUsuario(usuario.getSaldoCdbUsuario() + usuario.getSaldoTesouroUsuario() + usuario.getSaldoPoupancaUsuario());
 
                 usuarioDao.atualizar(usuario);
 

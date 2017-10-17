@@ -153,6 +153,14 @@ public class CadastroActivity extends AppCompatActivity {
         edtSenhaCadastro.setFocusable(false);
 
         imgUserCadastro.setVisibility(View.VISIBLE);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Aviso");
+        builder.setMessage("Essa funcionalidade será implementada em breve!");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK",null);
+        builder.show();
     }
 
     protected boolean validarCampos(Usuario usuario, String senhaUsuario){

@@ -41,29 +41,135 @@
             android:layout_marginTop="10dp"
             android:id="@+id/txtSaldoInvestir"/>
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="@string/poupanca"
-            android:layout_marginTop="20dp"
-            android:id="@+id/btnPoupancaInvestir"
-            android:onClick="investirPoupanca"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:weightSum="1">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="@string/tesouro_direto"
-            android:layout_marginTop="10dp"
-            android:id="@+id/btnTesouroInvestir"
-            android:onClick="investirTesouro"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.5">
 
-        <Button
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/poupanca"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:id="@+id/txtSaldoPoupancaInvestir"
+                    android:layout_marginTop="10dp" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnPoupancaInvestir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/investir"
+                android:layout_weight="0.5"
+                android:onClick="investirPoupanca"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="@string/cdb"
-            android:layout_marginTop="10dp"
-            android:id="@+id/btnCdbInvestir"
-            android:onClick="investirCdb"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tesouro_direto"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/txtSaldoTesouroInvestir"/>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnTesouroInvestir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/investir"
+                android:layout_weight="0.5"
+                android:onClick="investirTesouro"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cdb"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/txtSaldoCdbInvestir"/>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCdbInvestir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/investir"
+                android:layout_weight="0.5"
+                android:onClick="investirCdb"/>
+
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"

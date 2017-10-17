@@ -110,7 +110,8 @@
         android:id="@+id/btnAssistenteHome"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:onClick="acessarChatbot"/>
 
     <Button
         android:layout_marginTop="5dp"
